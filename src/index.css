@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF2D2D;
+  --color-dark: #0A0A0A;
+  --color-accent: #FFD700;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-dark text-white selection:bg-primary selection:text-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-8 py-3 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-primary active:scale-95;
+  }
+  .btn-outline {
+    @apply border-2 border-white text-white px-8 py-3 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-dark active:scale-95;
+  }
+}
+
+/* Custom underline animation for navbar */
+.nav-link {
+  @apply relative py-2 overflow-hidden;
+}
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 transition-transform duration-300 origin-right;
+}
+.nav-link:hover::after {
+  @apply scale-x-100 origin-left;
+}
+
+/* Red underline animation for hero headline */
+.hero-underline {
+  @apply absolute bottom-0 left-0 h-2 bg-primary w-0;
+}
+
+/* Clip path for about image */
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+}
+
+@media (max-width: 768px) {
+  .clip-diagonal {
+    clip-path: none;
+  }
+}
+
+/* Particle effect */
+.particle {
+  @apply absolute rounded-full bg-white opacity-20 pointer-events-none;
+  animation: float-up var(--duration) linear infinite;
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
